@@ -6,14 +6,30 @@ Uses [roughjs](https://roughjs.com/) for the hand-drawn aesthetic and Excalidraw
 
 ## Use with Claude Code
 
-Install the plugin so your agent can generate and render diagrams from natural language:
+### Install as a plugin
 
 ```bash
 /plugin marketplace add priyanshujain/skrawl
-/plugin install skrawl
+/plugin install skrawl@skrawl
 ```
 
-Then just ask:
+### Or install the skill directly
+
+```bash
+# Global — available in all projects
+mkdir -p ~/.claude/skills/diagram
+curl -o ~/.claude/skills/diagram/SKILL.md \
+  https://raw.githubusercontent.com/priyanshujain/skrawl/main/skills/diagram/SKILL.md
+
+# Or project-scoped — shared via version control
+mkdir -p .claude/skills/diagram
+curl -o .claude/skills/diagram/SKILL.md \
+  https://raw.githubusercontent.com/priyanshujain/skrawl/main/skills/diagram/SKILL.md
+```
+
+### Usage
+
+Once installed, just ask:
 
 ```
 "Draw an architecture diagram for this service"
@@ -21,7 +37,7 @@ Then just ask:
 "Visualize the database schema"
 ```
 
-Or use the `/diagram` command directly:
+Or invoke the skill directly:
 
 ```
 /diagram authentication flow between client, API gateway, and auth service
