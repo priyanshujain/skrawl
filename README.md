@@ -1,8 +1,31 @@
 # skrawl
 
-Render Excalidraw diagrams to PNG, JPEG, and SVG from the command line.
+Give your AI coding agent the ability to generate hand-drawn diagrams. skrawl renders Excalidraw diagrams to PNG, JPEG, and SVG — no browser required.
 
-Uses [roughjs](https://roughjs.com/) for the hand-drawn aesthetic and Excalidraw's [Virgil](https://github.com/excalidraw/virgil) font. No browser required.
+Uses [roughjs](https://roughjs.com/) for the hand-drawn aesthetic and Excalidraw's [Virgil](https://github.com/excalidraw/virgil) font.
+
+## Use with Claude Code
+
+Install the plugin so your agent can generate and render diagrams from natural language:
+
+```bash
+/plugin marketplace add priyanshujain/skrawl
+/plugin install skrawl
+```
+
+Then just ask:
+
+```
+"Draw an architecture diagram for this service"
+"Create a flowchart of the auth process"
+"Visualize the database schema"
+```
+
+Or use the `/diagram` command directly:
+
+```
+/diagram authentication flow between client, API gateway, and auth service
+```
 
 ## Install
 
@@ -16,7 +39,7 @@ Or use directly with `npx`:
 npx skrawl diagram.excalidraw -o diagram.png
 ```
 
-## Usage
+## CLI Usage
 
 ```bash
 skrawl <input.excalidraw> [options]
@@ -61,21 +84,6 @@ const svg = render(data, { format: "svg" });
 // Or use format-specific functions
 const buf = renderToPng(data, { scale: 3, darkMode: true });
 fs.writeFileSync("output.png", buf);
-```
-
-## Claude Code Plugin
-
-skrawl ships as a [Claude Code plugin](https://docs.anthropic.com/en/docs/claude-code) with a `diagram` skill and `/diagram` command. Install it so your agent can generate and render hand-drawn diagrams from natural language.
-
-```bash
-/plugin marketplace add priyanshujain/skrawl
-/plugin install skrawl
-```
-
-Then ask your agent to create diagrams, or use the command directly:
-
-```
-/diagram authentication flow between client, API gateway, and auth service
 ```
 
 ## License
