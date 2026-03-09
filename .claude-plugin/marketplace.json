@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Generate and render Excalidraw-style hand-drawn diagrams from descriptions",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "repository": "https://github.com/priyanshujain/skrawl"
   },
   "plugins": [
