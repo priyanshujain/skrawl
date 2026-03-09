@@ -135,6 +135,21 @@ describe("cli", () => {
     fs.unlinkSync(outPath);
   });
 
+  it("renders from --json string", async () => {
+    const { execFile } = await import("child_process");
+    const { promisify } = await import("util");
+    const exec = promisify(execFile);
+
+    const jsonStr = fs.readFileSync(INPUT, "utf-8");
+    const outPath = path.join(__dirname, "test-json-output.png");
+    await exec("node", [CLI, "--json", jsonStr, "-o", outPath]);
+
+    assert.ok(fs.existsSync(outPath));
+    const buf = fs.readFileSync(outPath);
+    assert.deepStrictEqual(buf.subarray(0, 4), Buffer.from([0x89, 0x50, 0x4e, 0x47]));
+    fs.unlinkSync(outPath);
+  });
+
   it("reads from stdin", async () => {
     const { spawn } = await import("child_process");
 

@@ -9,6 +9,7 @@ skrawl — Render Excalidraw diagrams to PNG, JPEG, or SVG
 
 Usage:
   skrawl <input.excalidraw> [options]
+  skrawl --json '<excalidraw json>' -o output.png
   cat diagram.json | skrawl --stdin [options]
 
 Options:
@@ -16,6 +17,7 @@ Options:
   -f, --format <fmt>      Output format: png, jpeg, svg (default: from -o or png)
   -s, --scale <n>         Scale factor for raster output (default: 2)
   -p, --padding <n>       Padding around diagram in px (default: 60)
+  -j, --json <string>     Pass excalidraw JSON directly as a string
   --dark                  Render with dark background
   --no-background         Transparent background
   --stdin                 Read excalidraw JSON from stdin
@@ -27,6 +29,7 @@ Examples:
   skrawl diagram.excalidraw
   skrawl diagram.excalidraw -o output.png -s 3
   skrawl diagram.excalidraw -f svg -o diagram.svg
+  skrawl --json '{"type":"excalidraw","elements":[...]}' -o out.png
   echo '{"type":"excalidraw",...}' | skrawl --stdin --stdout > out.png
 `.trim();
 
@@ -49,6 +52,8 @@ function parseArgs(argv) {
       args.darkMode = true;
     } else if (arg === "--no-background") {
       args.background = false;
+    } else if (arg === "-j" || arg === "--json") {
+      args.json = argv[++i];
     } else if (arg === "-o" || arg === "--output") {
       args.output = argv[++i];
     } else if (arg === "-f" || arg === "--format") {
@@ -105,7 +110,9 @@ async function main() {
 
   let jsonStr;
 
-  if (args.stdin) {
+  if (args.json) {
+    jsonStr = args.json;
+  } else if (args.stdin) {
     jsonStr = await readStdin();
   } else if (args._.length > 0) {
     const inputPath = path.resolve(args._[0]);
@@ -115,7 +122,7 @@ async function main() {
     }
     jsonStr = fs.readFileSync(inputPath, "utf-8");
   } else {
-    console.error("Error: No input file specified. Use --stdin or provide a file path.\n");
+    console.error("Error: No input specified. Use a file path, --json, or --stdin.\n");
     console.log(HELP);
     process.exit(1);
   }
