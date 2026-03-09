@@ -1,6 +1,6 @@
 {
   "name": "skrawl",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Render Excalidraw diagrams to PNG, JPEG, and SVG from the command line",
   "type": "module",
   "homepage": "https://github.com/priyanshujain/skrawl#readme",
