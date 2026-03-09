@@ -1,0 +1,23 @@
+{
+  "name": "skrawl",
+  "owner": {
+    "name": "Priyanshu Jain",
+    "url": "https://github.com/priyanshujain"
+  },
+  "metadata": {
+    "description": "Generate and render Excalidraw-style hand-drawn diagrams from descriptions",
+    "version": "0.1.3",
+    "repository": "https://github.com/priyanshujain/skrawl"
+  },
+  "plugins": [
+    {
+      "name": "skrawl",
+      "description": "Generate and render hand-drawn diagrams — architecture diagrams, flowcharts, system diagrams, and more using Excalidraw format and skrawl CLI",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/diagram"
+      ]
+    }
+  ]
+}
