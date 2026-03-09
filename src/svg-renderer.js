@@ -1,7 +1,6 @@
 import {
   computeBounds,
   getFontFamily,
-  buildRoughOptions,
   getAdaptiveRadius,
 } from "./utils.js";
 
@@ -66,7 +65,6 @@ export function renderToSvg(data, opts = {}) {
 function renderShapeSvg(el, ox, oy) {
   const x = el.x + ox;
   const y = el.y + oy;
-  const opts = buildRoughOptions(el);
   const opacity = (el.opacity ?? 100) / 100;
 
   let group = `<g opacity="${opacity}"`;

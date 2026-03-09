@@ -1,4 +1,7 @@
-export { renderToPng, renderToJpeg, renderToCanvas } from "./canvas-renderer.js";
+import { renderToPng, renderToJpeg } from "./canvas-renderer.js";
+import { renderToSvg } from "./svg-renderer.js";
+
+export { renderToPng, renderToJpeg } from "./canvas-renderer.js";
 export { renderToSvg } from "./svg-renderer.js";
 
 export function render(data, opts = {}) {
@@ -16,8 +19,3 @@ export function render(data, opts = {}) {
       throw new Error(`Unsupported format: ${format}`);
   }
 }
-
-// Re-export for convenience
-import { renderToPng } from "./canvas-renderer.js";
-import { renderToJpeg } from "./canvas-renderer.js";
-import { renderToSvg } from "./svg-renderer.js";

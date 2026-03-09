@@ -4,7 +4,7 @@ import {
   getAdaptiveRadius,
 } from "./utils.js";
 
-export function renderRectangle(rc, ctx, el, ox, oy) {
+export function renderRectangle(rc, el, ox, oy) {
   const x = el.x + ox;
   const y = el.y + oy;
   const opts = buildRoughOptions(el);
@@ -18,14 +18,14 @@ export function renderRectangle(rc, ctx, el, ox, oy) {
   }
 }
 
-export function renderEllipse(rc, ctx, el, ox, oy) {
+export function renderEllipse(rc, el, ox, oy) {
   const cx = el.x + ox + el.width / 2;
   const cy = el.y + oy + el.height / 2;
   const opts = buildRoughOptions(el);
   rc.ellipse(cx, cy, el.width, el.height, opts);
 }
 
-export function renderDiamond(rc, ctx, el, ox, oy) {
+export function renderDiamond(rc, el, ox, oy) {
   const x = el.x + ox;
   const y = el.y + oy;
   const cx = x + el.width / 2;
@@ -85,7 +85,7 @@ export function renderText(ctx, el, ox, oy, elementMap) {
   ctx.restore();
 }
 
-export function renderArrow(rc, ctx, el, ox, oy) {
+export function renderArrow(rc, el, ox, oy) {
   if (!el.points || el.points.length < 2) return;
   const opts = buildRoughOptions(el);
 
@@ -105,7 +105,7 @@ export function renderArrow(rc, ctx, el, ox, oy) {
   }
 }
 
-export function renderLine(rc, ctx, el, ox, oy) {
+export function renderLine(rc, el, ox, oy) {
   if (!el.points || el.points.length < 2) return;
   const opts = buildRoughOptions(el);
 

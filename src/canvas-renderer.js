@@ -74,13 +74,13 @@ export function renderToCanvas(data, opts = {}) {
 
     switch (el.type) {
       case "rectangle":
-        renderRectangle(rc, ctx, el, offsetX, offsetY);
+        renderRectangle(rc, el, offsetX, offsetY);
         break;
       case "ellipse":
-        renderEllipse(rc, ctx, el, offsetX, offsetY);
+        renderEllipse(rc, el, offsetX, offsetY);
         break;
       case "diamond":
-        renderDiamond(rc, ctx, el, offsetX, offsetY);
+        renderDiamond(rc, el, offsetX, offsetY);
         break;
     }
     ctx.restore();
@@ -91,10 +91,10 @@ export function renderToCanvas(data, opts = {}) {
     ctx.globalAlpha = (el.opacity ?? 100) / 100;
     switch (el.type) {
       case "arrow":
-        renderArrow(rc, ctx, el, offsetX, offsetY);
+        renderArrow(rc, el, offsetX, offsetY);
         break;
       case "line":
-        renderLine(rc, ctx, el, offsetX, offsetY);
+        renderLine(rc, el, offsetX, offsetY);
         break;
     }
     ctx.restore();
