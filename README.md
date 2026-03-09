@@ -29,6 +29,7 @@ skrawl <input.excalidraw> [options]
 -f, --format <fmt>      png, jpeg, or svg (default: png)
 -s, --scale <n>         Scale factor (default: 2)
 -p, --padding <n>       Padding in px (default: 60)
+-j, --json <string>     Pass excalidraw JSON directly as a string
 --dark                  Dark background
 --no-background         Transparent background
 --stdin                 Read from stdin
@@ -38,10 +39,11 @@ skrawl <input.excalidraw> [options]
 ### Examples
 
 ```bash
-skrawl diagram.excalidraw                          # → diagram.png
-skrawl diagram.excalidraw -o out.png -s 3          # 3x resolution
-skrawl diagram.excalidraw -f svg -o diagram.svg    # SVG output
-cat file.json | skrawl --stdin --stdout > out.png  # pipe mode
+skrawl diagram.excalidraw                                          # → diagram.png
+skrawl diagram.excalidraw -o out.png -s 3                          # 3x resolution
+skrawl diagram.excalidraw -f svg -o diagram.svg                    # SVG output
+skrawl --json '{"type":"excalidraw","elements":[...]}' -o out.png  # inline JSON
+cat file.json | skrawl --stdin --stdout > out.png                  # pipe mode
 ```
 
 ## Programmatic API
@@ -59,34 +61,6 @@ const svg = render(data, { format: "svg" });
 // Or use format-specific functions
 const buf = renderToPng(data, { scale: 3, darkMode: true });
 fs.writeFileSync("output.png", buf);
-```
-
-## Claude Code Skill
-
-skrawl includes a Claude Code plugin with a `/diagram` skill that lets AI agents generate Excalidraw diagrams from natural language descriptions.
-
-### Install the plugin
-
-```bash
-claude plugin add /path/to/skrawl
-```
-
-### Use the skill
-
-The `diagram` skill triggers automatically when you ask Claude to create diagrams, flowcharts, or architecture visuals. Claude generates Excalidraw JSON and renders it with skrawl.
-
-The `/diagram` command is also available:
-
-```
-/diagram A flowchart showing user authentication with OAuth
-```
-
-### Agent workflow
-
-skrawl is designed for AI agent pipelines. Agents can generate Excalidraw JSON and pipe it directly:
-
-```bash
-echo '<excalidraw json>' | npx skrawl --stdin -o diagram.png
 ```
 
 ## License
