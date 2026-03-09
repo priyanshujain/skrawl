@@ -17,15 +17,20 @@ You generate Excalidraw-format JSON diagrams and render them to PNG using `skraw
 
 1. Analyze what the user wants to visualize
 2. Plan the layout: identify boxes, labels, connections, and their spatial arrangement
-3. Generate valid Excalidraw JSON with these element types:
+3. Build valid Excalidraw JSON with these element types:
    - `rectangle` — for boxes/containers (use `backgroundColor` for color, `roundness: { "type": 3 }` for rounded corners)
    - `text` — for labels (use `containerId` to put text inside a shape, set `verticalAlign: "middle"`, `textAlign: "center"`)
    - `arrow` — for connections (use `points` array of `[dx, dy]` offsets, `startArrowhead`/`endArrowhead: "arrow"` for direction)
    - `ellipse` — for circular nodes
    - `diamond` — for decision nodes
    - `line` — for non-directional connections
-4. Write the JSON to a `.excalidraw` file
-5. Run `npx skrawl <file.excalidraw> -o <output.png>` to render
+4. Render directly to PNG in a single Bash command by piping the JSON through stdin. **NEVER create intermediate `.excalidraw` files.** The only file created should be the final output image.
+
+```bash
+npx skrawl --stdin -o <output>.png <<'EXCALIDRAW'
+{ "type": "excalidraw", "version": 2, "elements": [...], "appState": { "viewBackgroundColor": "#ffffff" }, "files": {} }
+EXCALIDRAW
+```
 
 ## Excalidraw JSON template
 
@@ -125,10 +130,12 @@ You generate Excalidraw-format JSON diagrams and render them to PNG using `skraw
 
 ## Rendering
 
-After writing the `.excalidraw` file, render with:
+Render directly by piping JSON through stdin — **never** create intermediate `.excalidraw` files:
 
 ```bash
-npx skrawl diagram.excalidraw -o diagram.png
+npx skrawl --stdin -o diagram.png <<'EXCALIDRAW'
+{ "type": "excalidraw", "version": 2, "elements": [...], "appState": { "viewBackgroundColor": "#ffffff" }, "files": {} }
+EXCALIDRAW
 ```
 
 Options: `--scale 3` for higher resolution, `--dark` for dark mode, `-f svg` for SVG output.
